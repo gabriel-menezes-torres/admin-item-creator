@@ -7,6 +7,9 @@ services:
       - "3000:80"
     depends_on:
       - backend
+    volumes:
+      - ./logs/frontend:/app/logs  # Mapeamento do diretório de logs do frontend
+      - ./frontend/src:/app/src
 
   backend:
     build: ./backend
@@ -14,6 +17,9 @@ services:
       - "3001:3001"
     environment:
       - NODE_ENV=development
+    volumes:
+      - ./logs/backend:/app/logs  # Mapeamento do diretório de logs do backend
+      - ./backend:/app  # Mapeamento do diretório do código fonte do backend
 
   mailserver:
     image: mailhog/mailhog
@@ -25,4 +31,4 @@ services:
     image: rabbitmq:3-management
     ports:
       - "5672:5672"
-      - "15672:15672" 
+      - "15672:15672"
