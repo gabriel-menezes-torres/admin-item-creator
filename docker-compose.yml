@@ -4,12 +4,13 @@ services:
   frontend:
     build: ./frontend
     ports:
-      - "3000:80"
+      - "3000:3000"
     depends_on:
       - backend
     volumes:
       - ./logs/frontend:/app/logs  # Mapeamento do diretório de logs do frontend
-      - ./frontend/src:/app/src
+      - ./frontend:/app
+      - /app/node_modules
 
   backend:
     build: ./backend
